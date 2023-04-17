@@ -83,3 +83,52 @@ INSERT INTO estudiantes
 	('Quintana', 'Tania', '33334444', '2001-05-05', 9, 4);
 
 SELECT * FROM estudiantes;
+
+
+
+-- CREANDO TABLA CARGO
+CREATE TABLE cargos
+(
+	idcargo 	INT AUTO_INCREMENT PRIMARY KEY,
+	cargo 	VARCHAR(20),
+	CONSTRAINT uk_cargo_cargos UNIQUE (cargo)	
+)ENGINE INNODB;
+
+INSERT INTO cargos (cargo) VALUES
+('Instructor'),
+('Jefe de centro'),
+('Asist. Administrativo'),
+('Asist. Academico'),
+('Cordinador ETIA'),
+('Coordinardor CIS');
+
+SELECT * FROM cargos;
+-- CREANDO TABLA COLABORADORES
+
+CREATE TABLE colaboradores
+(
+	idcolaborador	INT 		AUTO_INCREMENT PRIMARY KEY,
+	apellidos 		VARCHAR(40)		NOT NULL,
+	nombres			VARCHAR(40) 	NOT NULL,
+	idcargo 			INT 				NOT NULL,
+	idsede			INT 				NOT NULL,
+	telefono 		CHAR(12)			NOT NULL,
+	tipocontrato 	CHAR(1)			NOT NULL,
+	cv 				VARCHAR (100) 	NULL,
+	direccion 		VARCHAR (40)   NOT NULL,
+	fecharegistro 	DATETIME 		NOT NULL DEFAULT NOW(),
+	fechaupdate 	DATETIME			NULL,
+	estado 			CHAR(1) 			DEFAULT '1',
+	CONSTRAINT fk_idcargo_colab FOREIGN KEY (idcargo) REFERENCES cargos(idcargo),
+	CONSTRAINT fk_idsede_colab FOREIGN KEY (idsede) REFERENCES sedes(idsede)
+
+)ENGINE =INNODB;
+
+
+INSERT INTO colaboradores(apellidos, nombres, idcargo, idsede, telefono, tipocontrato, cv, direccion)VALUES 
+
+('Morales','Paul',2,1,'966341081','C',NULL,'Pisco'),
+('Palomino','Ericka',2,1,'966589781','P',NULL,'Pueblo nuevo');
+
+
+SELECT * FROM colaboradores

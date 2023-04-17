@@ -42,6 +42,11 @@ BEGIN
 	(_apellidos, _nombres, _tipodocumento, _nrodocumento, _fechanacimiento, _idcarrera, _idsede, _fotografia);
 END $$
 
+UPDATE estudiantes
+SET fotografia = NULL
+WHERE fotografia = 'unafoto.jpg' OR
+		fotografia = '';
+
 /*
 CALL spu_estudiantes_registrar('Francia Minaya', 'Jhon', 'D', '12345678', '1984-09-20', 5, 1, '');
 CALL spu_estudiantes_registrar('Munayco', 'José', 'D', '77779999', '1999-09-20', 3, 2, NULL); */
@@ -70,4 +75,51 @@ BEGIN
 END $$
 
 CALL spu_carreras_listar(3);
+
+-- LISTANDO COLABORADORES 
+SELECT * FROM colaboradores
+
+DELIMITER$$
+CREATE PROCEDURE spu_colaboradores_listar()
+BEGIN
+	SELECT COLB.idcolaborador,
+			 COLB.apellidos,COLB.nombres,
+			 COLB.telefono,
+			 CARG.cargo,SED.sede,
+			 COLB.tipocontrato,COLB.cv,
+			 COLB.direccion
+	FROM colaboradores COLB
+	INNER JOIN cargos CARG ON CARG.idcargo = COLB.idcargo
+	INNER JOIN sedes SED ON SED.idsede = COLB.idsede
+	WHERE COLB.estado ='1';
+END$$
+
+CALL spu_colaboradores_listar();
+
+-- AGREGANDO COLABORADORES
+
+DELIMITER$$
+CREATE PROCEDURE spu_colaboradores_agregar
+(
+	IN apellidos_ 		VARCHAR(40),
+	IN nombres_			VARCHAR(40),
+	IN telefono_ 		CHAR(12),
+	IN idcargo_  		INT,
+	IN idsede_ 			INT,
+	IN tipocontrato_ 	CHAR(1),
+	IN direccion_ 		VARCHAR(40),
+	IN cv_ 				VARCHAR(100)
+)
+BEGIN
+	IF cv_ = '' THEN 
+		SET cv_ = NULL;
+	END IF;
+	
+	INSERT INTO colaboradores
+	(apellidos, nombres, idcargo, idsede, telefono, tipocontrato, direccion, cv)VALUES
+	(apellidos_, nombres_, idcargo_, idsede_, telefono_, tipocontrato_, direccion_, cv_);
+END$$
+
+CALL spu_colaboradores_agregar('Pachas','Melany','96691378',3,2,'C','algun lugar', NULL);
+
 
