@@ -46,23 +46,44 @@ if(isset($_POST['operacion'])){
 
     $datosObtenidos = $estudiante->listarEstudiante();
 
+    
     if($datosObtenidos){
       $nfilas =1;
-      foreach($datosObtenidos as $estudiante){
+      $datosEstudiante = '';
+      $botonNulo = "<a href='#' class='btn btn-sm btn-warning' title='No Tiene fotografia'><i class='bi bi-eye-slash-fill'></i></a>";
+
+
+      foreach($datosObtenidos as $registro){
+        $datosEstudiante = $registro['apellidos'].' '.$registro['nombres'];
+       
+
+        //La primera parte a renderizar, es lo estandar (siempre lo muestra)
 
         echo"
         <tr>
         <td>{$nfilas}</td>
-        <td>{$estudiante['apellidos']}</td>
-        <td>{$estudiante['nombres']}</td>  
-        <td>{$estudiante['tipodocumento']}</td>
-        <td>{$estudiante['nrodocumento']}</td>
-        <td>{$estudiante['fechanacimiento']}</td>
-        <td>{$estudiante['escuela']}</td>
-        <td>{$estudiante['carrera']}</td>
-        <td>{$estudiante['sede']}</td>
-        <td>{$estudiante['fotografia']}</td>
-        </tr>
+        <td>{$registro['apellidos']}</td>
+        <td>{$registro['nombres']}</td>  
+        <td>{$registro['tipodocumento']}</td>
+        <td>{$registro['nrodocumento']}</td>
+        <td>{$registro['fechanacimiento']}</td>
+        <td>{$registro['carrera']}</td>
+        <td>
+           <a href='#' data-idestudiante='{$registro['idestudiante']}' class='btn btn-danger btn-sm eliminar'><i class='bi bi-trash3'></i></a>
+           <a href='#' data-idestudiante='{$registro['idestudiante']}' class='btn btn-info btn-sm editar'><i class='bi bi-pencil-fill'></i></a>";
+
+        // la suegunda parate a RENDERIZAR, es el boton ver fotografia
+
+        if($registro['fotografia']==''){
+          echo $botonNulo;
+        }else{
+          echo "<a href='../views/img/fotografias/{$registro['fotografia']}' data-lightbox=registro'{$registro['idestudiante']}' data-title='{$datosEstudiante}' class='btn btn-warning btn-sm editar'><i class='bi bi-eye-fill'></i></i></a>";
+        }
+
+        // La tercera parte a renderizar seria el cierre de la fila   
+        echo"
+          </td>
+         </tr>
         ";
         $nfilas++;
       }

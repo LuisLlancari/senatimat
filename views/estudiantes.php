@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <title>Title</title>
@@ -11,14 +11,24 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
+  <!--- lgiht box css-->
+  <link href="../dist/lightbox2/src/css/lightbox.css" rel="stylesheet" />
+
+  <!-- <link href="path/to/lightbox.css" rel="stylesheet" /> -->
+
 </head>
 
 <body>
   
   <!-- Modal trigger button -->
+  <div class="container mt-4 mb-4">
   <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal-estudiante">
     Launch
   </button>
+  </div>
+  
   <div class="container">
     <table id= "tabla-estudiantes"class="table table-striped table-sm">
       <thead>
@@ -130,9 +140,27 @@
 
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <!-- scrip light box-->
+
+  <script src="../dist/lightbox2/src/js/lightbox.js"></script>
+
 
   <script>
     $(document).ready(function (){
+
+      function mostrarEstudiantes(){
+        $.ajax({
+          url: '../controllers/estudiante.controller.php',
+          type: 'POST',
+          data: {operacion: 'listar'},
+          dataType: 'text',
+          success:function(result){
+            $("#tabla-estudiantes tbody").html(result);
+
+          }
+        });
+      }
       
       function obtenerSedes(){
         $.ajax({
@@ -239,6 +267,8 @@
         obtenerSedes();
         obtenerEscuelas();
       });
+
+      mostrarEstudiantes();
 
     });
   </script>
