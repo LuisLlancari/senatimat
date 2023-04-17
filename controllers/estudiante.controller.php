@@ -53,11 +53,15 @@ if(isset($_POST['operacion'])){
         echo"
         <tr>
         <td>{$nfilas}</td>
-        <td>{$usuario['nombreusuario']}</td>
-        <td>{$usuario['apellidos']}</td>  
-        <td>{$usuario['nombres']}</td>
-        <td>{$usuario['nivelacceso']}</td>
-        <td>{$usuario['fecharegistro']}</td>
+        <td>{$estudiante['apellidos']}</td>
+        <td>{$estudiante['nombres']}</td>  
+        <td>{$estudiante['tipodocumento']}</td>
+        <td>{$estudiante['nrodocumento']}</td>
+        <td>{$estudiante['fechanacimiento']}</td>
+        <td>{$estudiante['escuela']}</td>
+        <td>{$estudiante['carrera']}</td>
+        <td>{$estudiante['sede']}</td>
+        <td>{$estudiante['fotografia']}</td>
         </tr>
         ";
         $nfilas++;
