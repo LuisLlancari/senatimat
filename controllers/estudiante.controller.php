@@ -42,4 +42,27 @@ if(isset($_POST['operacion'])){
 
   }
 
+  if($_POST['operacion'] == 'listar'){
+
+    $datosObtenidos = $estudiante->listarEstudiante();
+
+    if($datosObtenidos){
+      $nfilas =1;
+      foreach($datosObtenidos as $estudiante){
+
+        echo"
+        <tr>
+        <td>{$nfilas}</td>
+        <td>{$usuario['nombreusuario']}</td>
+        <td>{$usuario['apellidos']}</td>  
+        <td>{$usuario['nombres']}</td>
+        <td>{$usuario['nivelacceso']}</td>
+        <td>{$usuario['fecharegistro']}</td>
+        </tr>
+        ";
+        $nfilas++;
+      }
+    }
+  }
+
 }

@@ -13,7 +13,7 @@ class Estudiante extends Conexion{
   //datos[] es un array asociativo, que contiene la informacion
   //a guardar proveniente del controlador
 
-  public function registrarEstudiante($datos =[]){
+  public function registrarEstudiante($datos =[]){  
     try {
       $consulta = $this->accesoBD->prepare("CALL spu_estudiantes_registrar(?,?,?,?,?,?,?,?)");
       $consulta->execute(
@@ -34,5 +34,15 @@ class Estudiante extends Conexion{
     }
   }
 
-  
+  public function listarEstudiante(){
+    try {
+      $consulta = $this->accesoBD->prepare("CALL spu_estudiantes_listar()");
+      $consulta->execute();
+      
+      return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } 
+    catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
 }
