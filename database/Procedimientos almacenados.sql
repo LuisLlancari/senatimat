@@ -77,7 +77,7 @@ END $$
 CALL spu_carreras_listar(3);
 
 -- LISTANDO COLABORADORES 
-SELECT * FROM colaboradores
+	SELECT * FROM colaboradores
 
 DELIMITER$$
 CREATE PROCEDURE spu_colaboradores_listar()
@@ -122,4 +122,10 @@ END$$
 
 CALL spu_colaboradores_agregar('Pachas','Melany','96691378',3,2,'C','algun lugar', NULL);
 
+-- Listar Cargos
 
+DELIMITER $$
+CREATE PROCEDURE spu_cargos_listar()
+BEGIN
+	SELECT * FROM cargos ORDER BY 1;
+END $$
