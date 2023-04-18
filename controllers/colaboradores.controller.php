@@ -29,8 +29,8 @@ if(isset($_POST['operacion'])){
             <td>{$registros['tipocontrato']}</td>
             <td>{$registros['direccion']}</td>
             <td>
-              <a href='#' data-idcurso='{$registros['idcolaborador']}' class='btn btn-danger btn-sm eliminar'><i class='bi bi-trash3'></i></a>
-              <a href='#' data-idcurso='{$registros['idcolaborador']}' class='btn btn-info btn-sm editar'><i class='bi bi-pencil-fill'></i></a>";
+              <a href='#' data-idcolaborador='{$registros['idcolaborador']}' class='btn btn-danger btn-sm eliminar'><i class='bi bi-trash3'></i></a>
+              <a href='#' data-idcolaborador='{$registros['idcolaborador']}' class='btn btn-info btn-sm editar'><i class='bi bi-pencil-fill'></i></a>";
               // <a href='#' data-idcurso='{$registros['idcolaborador']}' class='btn btn-outline-danger btn-sm mostrar'><i class='bi bi-file-pdf-fill'></i></a>
 
               if($registros['cv']==''){
@@ -79,7 +79,10 @@ if(isset($_POST['operacion'])){
   }
 
 
+  if($_POST['operacion'] == 'eliminar'){
 
+    $colaborador->eliminarColaboradores($_POST['idcolaborador']);
+  }
 
 
 

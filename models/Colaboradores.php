@@ -42,4 +42,14 @@ class Colaboradores extends Conexion{
     }
   }
   
+  public function eliminarColaboradores($idcolaborador = 0){
+    try {
+      $consulta = $this->accesoBD->prepare("CALL spu_colaboradores_eliminar(?)");
+      $consulta->execute(array($idcolaborador));
+
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+  }
+
 }

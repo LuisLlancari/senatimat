@@ -129,3 +129,6 @@ CREATE PROCEDURE spu_cargos_listar()
 BEGIN
 	SELECT * FROM cargos ORDER BY 1;
 END $$
+	SELECT * FROM colaboradores ORDER BY 1;
+
+
