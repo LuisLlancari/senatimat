@@ -88,17 +88,18 @@ if(isset($_POST['operacion'])){
     // }
   }
 
-  if ($_POST['operacion'] == 'obtenercv'){
-    $registro = $colaborador->obtnerCv($_POST['idcolaborador']);
+//   if ($_POST['operacion'] == 'obtenercv'){
+//     $registro = $colaborador->obtnerCv($_POST['idcolaborador']);
     
    
-    if($registro == null ){
-        echo"hola";
-    }else{
-      unlink("../views/document/pdf/{$registro['cv']}");
-    }
+//     if($registro == null ){
+//         echo"hola";
+//     }else{
+//       unlink("../views/document/pdf/{$registro['cv']}");
+//     }
   
-  }
+//   }
+// }
 }
 
 

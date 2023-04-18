@@ -226,15 +226,15 @@
       
 
       $("#tabla-colaborador tbody").on("click", ".eliminar", function (){
-        const $idcolaboradorEliminar =$(this).data("idcolaborador");
+        const idcolaboradorEliminar =$(this).data("idcolaborador");
         if (confirm("Estas seguro de proceder? ")){ 
           $.ajax({
 
             url: '../controllers/colaboradores.controller.php',
             type: 'POST',
             data: {
-              operacion          :'eliminar',
-              idcolaborador      : idcolaboradorEliminar
+              operacion         :'eliminar',
+              idcolaborador     : idcolaboradorEliminar
             },
             success: function(result){
               if (result == ""){
