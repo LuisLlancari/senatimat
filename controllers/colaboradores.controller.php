@@ -14,7 +14,8 @@ if(isset($_POST['operacion'])){
 
     if($datosObtenidos){
       $Nfilas = 1;
-      
+      $botonNulo = "<a href='#' class='btn btn-outline-danger btn-sm mostrar' title='No Tiene Nada'><i class='bi bi-file-pdf-fill'></i></a>";
+
       foreach($datosObtenidos as $registros){
         echo
         "
@@ -29,8 +30,15 @@ if(isset($_POST['operacion'])){
             <td>{$registros['direccion']}</td>
             <td>
               <a href='#' data-idcurso='{$registros['idcolaborador']}' class='btn btn-danger btn-sm eliminar'><i class='bi bi-trash3'></i></a>
-              <a href='#' data-idcurso='{$registros['idcolaborador']}' class='btn btn-info btn-sm editar'><i class='bi bi-pencil-fill'></i></a>
-              
+              <a href='#' data-idcurso='{$registros['idcolaborador']}' class='btn btn-info btn-sm editar'><i class='bi bi-pencil-fill'></i></a>";
+              // <a href='#' data-idcurso='{$registros['idcolaborador']}' class='btn btn-outline-danger btn-sm mostrar'><i class='bi bi-file-pdf-fill'></i></a>
+
+              if($registros['cv']==''){
+                echo $botonNulo;
+              }else{
+                echo "<a href='../views/document/pdf/{$registros['cv']}' target='_blank' class='btn btn-danger btn-sm mostrar'><i class='bi bi-file-pdf-fill'></i></a>";
+              } 
+             echo"  
             </td>
           </tr>
         ";
@@ -43,7 +51,7 @@ if(isset($_POST['operacion'])){
 
   if($_POST['operacion'] == 'registrar'){
 
-    $datoGuardar = [
+    $datosGuardar = [
       "apellidos"     =>$_POST['apellidos'],
       "nombres"       =>$_POST['nombres'],
       "telefono"      =>$_POST['telefono'],
@@ -67,7 +75,7 @@ if(isset($_POST['operacion'])){
       }
     }
 
-    $colaborador->registrarColaboradores($datoGuardar);
+    $colaborador->registrarColaboradores($datosGuardar);
   }
 
 

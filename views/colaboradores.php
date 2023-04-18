@@ -189,7 +189,7 @@
           cache: false,
           success: function(){
             $("#formulario-colaborador")[0].reset();
-            $("#modal-colaborador").modal("hide");
+            $("modal-colaborador").modal("hide");
             alert("guardado correctamente");
             
           }
