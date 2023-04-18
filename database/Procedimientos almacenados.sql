@@ -145,9 +145,9 @@ END$$
 CALL spu_colaboradores_eliminar(2)
 
 DELIMITER$$
-CREATE PROCEDURE spu_colaborador_recuperar_cv(IN idcolaborador_ INT)
+CREATE PROCEDURE spu_colaborador_getcv(IN idcolaborador_ INT)
 BEGIN
 	SELECT cv FROM colaboradores WHERE idcolaborador = idcolaborador_;
 END$$
 
-CALL spu_colaborador_recuperar_cv(7)
+CALL spu_colaborador_getcv(13)
