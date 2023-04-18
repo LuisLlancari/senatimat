@@ -189,8 +189,10 @@
           cache: false,
           success: function(){
             $("#formulario-colaborador")[0].reset();
-            $("modal-colaborador").modal("hide");
+            $("#modal-colaborador").modal("hide");
+
             alert("guardado correctamente");
+            mostrarColaboradores();
             
           }
         });
@@ -219,16 +221,19 @@
           }
         });
       }
+      function eliminarCv(idcolaboradorEliminar){}
+
+      
 
       $("#tabla-colaborador tbody").on("click", ".eliminar", function (){
-        const idcolaboradorEliminar =$(this).data("idcolaborador");
+        const $idcolaboradorEliminar =$(this).data("idcolaborador");
         if (confirm("Estas seguro de proceder? ")){ 
           $.ajax({
 
             url: '../controllers/colaboradores.controller.php',
             type: 'POST',
             data: {
-              operacion     :'eliminar',
+              operacion          :'eliminar',
               idcolaborador      : idcolaboradorEliminar
             },
             success: function(result){

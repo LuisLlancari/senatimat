@@ -81,11 +81,24 @@ if(isset($_POST['operacion'])){
 
   if($_POST['operacion'] == 'eliminar'){
 
-    $colaborador->eliminarColaboradores($_POST['idcolaborador']);
+    $registro = $colaborador->eliminarColaboradores($_POST['idcolaborador']);
+    
+    // if($registro['cv'] != null){
+    //   unlink("../views/document/pdf/{$registro['cv']}/");
+    // }
   }
 
-
-
-
-
+  if ($_POST['operacion'] == 'obtenercv'){
+    $registro = $colaborador->obtnerCv($_POST['idcolaborador']);
+    
+   
+    if($registro == null ){
+        echo"hola";
+    }else{
+      unlink("../views/document/pdf/{$registro['cv']}");
+    }
+  
+  }
 }
+
+

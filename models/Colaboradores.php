@@ -52,4 +52,15 @@ class Colaboradores extends Conexion{
     }
   }
 
+  public function obtnerCv($idcolaborador=0){
+    try {
+      $consulta = $this->accesoBD->prepare("CALL spu_colaborador_getcv(?)");
+      $consulta->execute(array($idcolaborador));
+
+      return $consulta->fetch(PDO::FETCH_ASSOC);
+
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+ }
 }

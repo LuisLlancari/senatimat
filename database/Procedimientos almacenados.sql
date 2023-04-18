@@ -130,5 +130,24 @@ BEGIN
 	SELECT * FROM cargos ORDER BY 1;
 END $$
 	SELECT * FROM colaboradores ORDER BY 1;
+	
+-- PROCEDIMIENTO PARA ELIINAR COLABORADORES
+DELIMITER $$
+CREATE PROCEDURE spu_colaboradores_eliminar(IN idcolaborador_ INT)
+BEGIN
+	 
+	DELETE FROM colaboradores
+	WHERE idcolaborador = idcolaborador_;
+END$$
 
+	SELECT * FROM colaboradores;
 
+CALL spu_colaboradores_eliminar(2)
+
+DELIMITER$$
+CREATE PROCEDURE spu_colaborador_recuperar_cv(IN idcolaborador_ INT)
+BEGIN
+	SELECT cv FROM colaboradores WHERE idcolaborador = idcolaborador_;
+END$$
+
+CALL spu_colaborador_recuperar_cv(7)
