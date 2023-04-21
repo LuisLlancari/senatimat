@@ -217,7 +217,6 @@
           success: function(){
             $("#formulario-estudiantes")[0].reset();
             $("modal-estudiante").modal("hide");
-            alert("guardado correctamente");
           }
         });
       }

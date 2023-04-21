@@ -159,6 +159,7 @@
         });
       }
 
+
       function registrarColaborador(){
         
         //Enviaremos los datos dentro de un objeto
@@ -190,8 +191,6 @@
           success: function(){
             $("#formulario-colaborador")[0].reset();
             $("#modal-colaborador").modal("hide");
-
-            alert("guardado correctamente");
             mostrarColaboradores();
             
           }
@@ -221,31 +220,96 @@
           }
         });
       }
-      function eliminarCv(idcolaboradorEliminar){}
+
+
+      function preguntarRegistro(){
+        Swal.fire({
+          icon: 'question',
+          title: 'Colaboradores',
+          text: '¿Está seguro de registrar al Colaborador?',
+          footer: 'Desarrollado con PHP',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#3498DB',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          //Identificando acción del usuario
+          if (result.isConfirmed){
+            registrarColaborador();
+          }
+        });
+      }
+      
+      function alertaRegistrado(){
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Registro exitoso'
+      })
+      }
+
+
+      $("#tabla-colaborador tbody").on("click", ".eliminar", function (){
+        const idColaborador = $(this).data("idcolaborador");
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+          title: 'Estas seguro?',
+          text: "No podrás revertir esto!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí, elimínalo!',
+          cancelButtonText: 'No, cancelar!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            eliminarColaborador(idColaborador);
+            swalWithBootstrapButtons.fire(
+              'ELIMINADO!',
+              'Colborador Eliminado',
+              'success'
+              
+            )
+            
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              'CANCELADO',
+              'Regstro sin cambios',
+              'error'
+            )
+          }
+        })
+      });
 
       
 
-      $("#tabla-colaborador tbody").on("click", ".eliminar", function (){
-        const idcolaboradorEliminar =$(this).data("idcolaborador");
-        if (confirm("Estas seguro de proceder? ")){ 
-          $.ajax({
 
-            url: '../controllers/colaboradores.controller.php',
-            type: 'POST',
-            data: {
-              operacion         :'eliminar',
-              idcolaborador     : idcolaboradorEliminar
-            },
-            success: function(result){
-              if (result == ""){
-                mostrarColaboradores();
-              }}
-          });
-         }
-      });
+      
+        
+      
 
-
-      $("#guardar-colaborador").click(registrarColaborador);
+      
+      $("#guardar-colaborador").click(preguntarRegistro);
 
       
       mostrarColaboradores();
