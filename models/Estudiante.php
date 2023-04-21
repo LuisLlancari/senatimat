@@ -45,4 +45,27 @@ class Estudiante extends Conexion{
       die($e->getMessage());
     }
   }
+
+  public function eliminarEstudiantes($idestudiante= 0){
+    try {
+      $consulta = $this->accesoBD->prepare("CALL spu_estudiantes_eliminar(?)");
+      $consulta->execute(array($idestudiante));
+
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+  }
+
+  public function obtenerfoto($idestudiante= 0){
+    try {
+      $consulta = $this->accesoBD->prepare("CALL spu_estudiantes_getfoto(?)");
+      $consulta->execute(array($idestudiante));
+
+      return $consulta->fetch(PDO::FETCH_ASSOC);
+
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+ }
+  
 }

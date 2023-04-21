@@ -23,9 +23,9 @@
 <body>
   
   <!-- Modal trigger button -->
-  <div class="container mt-4 mb-4">
-  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal-estudiante">
-    Launch
+  <div class="container mt-4 bg-success">
+  <button type="button" class="btn btn-sm btn-primary btn-lg mt-1 mb-1 " data-bs-toggle="modal" data-bs-target="#modal-estudiante">
+    Registrar
   </button>
   </div>
   
@@ -217,6 +217,7 @@
           success: function(){
             $("#formulario-estudiantes")[0].reset();
             $("modal-estudiante").modal("hide");
+            mostrarEstudiantes()
           }
         });
       }
@@ -238,6 +239,63 @@
           }
         });
       }
+
+      function eliminarEstudiante(idEstudiante){
+        $.ajax
+          ({
+              url: '../controllers/estudiante.controller.php',
+              type: 'POST',
+              data: 
+              {
+                operacion   : 'eliminar',
+                idestudiante     : idEstudiante
+              },
+              success: function(result){
+                if (result == ""){mostrarEstudiantes();}
+              }
+          });
+      }
+      $("#tabla-estudiantes").on("click", ".eliminar", function (){
+        const idEstudiante = $(this).data("idestudiante");
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+          title: 'Estas seguro?',
+          text: "No podrás revertir esto!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí, elimínalo!',
+          cancelButtonText: 'No, cancelar!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            eliminarEstudiante(idEstudiante);
+            swalWithBootstrapButtons.fire(
+              'ELIMINADO!',
+              'Estudiante Eliminado',
+              'success'
+              
+            )
+            
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              'CANCELADO',
+              'Regstro sin cambios',
+              'error'
+            )
+          }
+        })
+      });
+
 
       $("#guardar-estudiante").click(preguntarRegistro);
 
@@ -265,9 +323,10 @@
 
         obtenerSedes();
         obtenerEscuelas();
+        
       });
-
       mostrarEstudiantes();
+
 
     });
   </script>

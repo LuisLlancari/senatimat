@@ -251,12 +251,28 @@
           toast.addEventListener('mouseenter', Swal.stopTimer)
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
+        })
 
-      Toast.fire({
-        icon: 'success',
-        title: 'Registro exitoso'
-      })
+        Toast.fire({
+          icon: 'success',
+          title: 'Registro exitoso'
+        })
+    }
+
+      function eliminarColaborador(idColaborador){
+        $.ajax
+          ({
+              url: '../controllers/colaboradores.controller.php',
+              type: 'POST',
+              data: 
+              {
+                operacion   : 'eliminar',
+                idcolaborador     : idColaborador
+              },
+              success: function(result){
+                if (result == ""){mostrarColaboradores();}
+              }
+          });
       }
 
 
