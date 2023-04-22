@@ -151,3 +151,25 @@ BEGIN
 END$$
 
 CALL spu_colaborador_getcv(13)
+-- CREANDO EL ELIMINAR PARA ESTUDIANTES Y SU FOTO
+SELECT * FROM estudiantes
+
+DELIMITER $$
+CREATE PROCEDURE spu_estudiantes_eliminar(IN idestudiante_ INT)
+BEGIN
+	 
+	DELETE FROM estudiantes
+	WHERE idestudiante = idestudiante_;
+END$$
+
+CALL spu_estudiantes_eliminar(1)
+
+
+
+DELIMITER$$
+CREATE PROCEDURE spu_estudiantes_getfoto(IN idestudiante_ INT)
+BEGIN
+	SELECT fotografia FROM estudiantes WHERE idestudiante = idestudiante_;
+END$$
+
+CALL spu_estudiantes_getfoto(5)

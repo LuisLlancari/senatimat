@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (isset($_SESSION['login']) && $_SESSION['login']==true){
+  header('Location: ./views/estudiantes.php');
+}
+
+
 ?>
 
 <!doctype html>
@@ -60,6 +67,43 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <script>
+     $(document).ready(function (){
+
+      function iniciarSesion(){
+        const Usuario = $("#usuario").val();
+        const clave = $("#clave").val();
+        
+        if (usuario != "" && clave != ""){
+          $.ajax({
+            url: 'controllers/usuario.controller.php',
+            type: 'POST',
+            data: {
+              operacion     : 'login',
+              usuario : Usuario,
+              claveIngresada: clave
+            },
+            dataType: 'JSON',
+            success: function (result){
+              console.log(result);
+              if (result["status"]){
+                window.location.href = "views/estudiantes.php";
+              }else{
+                alert(result["mensaje"]);
+              }
+            }
+          });
+        }
+      }
+
+      $("#iniciar-sesion").click(iniciarSesion);
+
+      });
+  </script>
+
 </body>
 
 </html>

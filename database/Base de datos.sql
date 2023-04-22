@@ -132,3 +132,19 @@ INSERT INTO colaboradores(apellidos, nombres, idcargo, idsede, telefono, tipocon
 
 
 SELECT * FROM colaboradores
+
+-- TABLA USUARIOS
+
+CREATE TABLE usuarios
+(
+	idusuario 		INT  			AUTO_INCREMENT  PRIMARY KEY,
+	usuario 			VARCHAR(20) NOT NULL,
+	clave 			VARCHAR(90) NOT NULL,
+	fecharegistro 	DATETIME 	DEFAULT NOW(),
+	estado 			CHAR(1) 		DEFAULT '1',
+	CONSTRAINT un_usuario_usu UNIQUE(usuario)
+)ENGINE = INNODB;
+
+
+INSERT INTO usuarios(usuario,clave) VALUES('Jonas','1234')
+SELECT * FROM usuarios

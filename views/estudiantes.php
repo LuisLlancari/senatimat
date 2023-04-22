@@ -1,3 +1,11 @@
+<?php
+session_start();
+ 
+if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
+  header('Location: ../index.php');
+}
+
+?>
 <!doctype html>
 <html lang="es">
 
@@ -47,6 +55,9 @@
 
       </tbody>
     </table>
+    <div class="card-footer text-end">
+        <a href="../controllers/usuario.controller.php?operacion=finalizar">Cerrar sesión</a>
+      </div>
   </div>
   
   <!-- Modal Body -->
@@ -216,8 +227,8 @@
           cache: false,
           success: function(){
             $("#formulario-estudiantes")[0].reset();
-            $("modal-estudiante").modal("hide");
-            mostrarEstudiantes()
+            $("#modal-estudiante").modal("hide");
+            mostrarEstudiantes();
           }
         });
       }
@@ -251,7 +262,7 @@
                 idestudiante     : idEstudiante
               },
               success: function(result){
-                if (result == ""){mostrarEstudiantes();}
+                mostrarEstudiantes();         
               }
           });
       }

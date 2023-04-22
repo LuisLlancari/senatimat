@@ -25,7 +25,7 @@
               <strong>COLABORADORES</strong>
             </div>
             <div class="col-md-6 text-end">
-            <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modal-colaborador">
+            <button type="button" class="btn btn-sm btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modal-colaborador">
               Agregar Colaborador
             </button>
             </div>
