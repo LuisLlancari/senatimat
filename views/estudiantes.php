@@ -39,9 +39,17 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
   <div class="container mt-3">
     <div class="card">
       <div class="card-header bg-primary text-light">
-        <button type="button" class="btn btn-sm btn-primary btn-lg mt-1 mb-1 " data-bs-toggle="modal" data-bs-target="#modal-estudiante">
-          Registrar
-        </button>
+        <div class="row">
+          <div class="col-md-6">
+            <strong>TABLA ESTUDIANTES</strong>
+          </div>
+          <div class="col-md-6 text-end">
+            <button type="button" class="btn btn-sm btn-success btn-lg mt-1 mb-1 " data-bs-toggle="modal" data-bs-target="#modal-estudiante">
+            Registrar
+            </button>
+          </div>
+        </div>
+        
       </div>  
     
     
@@ -62,12 +70,12 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
           <tbody>
 
           </tbody>
-        </table>
-        <div class="card-footer text-end">
-            <a href="../controllers/usuario.controller.php?operacion=finalizar">Cerrar sesión</a>
-          </div>
-      </div>
+        </table>       
+      </div>   
     </div>
+    <div class="container text-end ">
+        <a  class="text-light"href="../controllers/usuario.controller.php?operacion=finalizar">Cerrar sesión</a>
+      </div>
   </div>
   
   <!-- Modal Body -->

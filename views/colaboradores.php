@@ -35,7 +35,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
         <div class="card-header bg-primary text-light">
           <div class="row">
             <div class="col-md-6">
-              <strong>COLABORADORES</strong>
+              <strong>TABLA COLABORADORES</strong>
             </div>
             <div class="col-md-6 text-end">
             <button type="button" class="btn btn-sm btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modal-colaborador">
@@ -66,6 +66,9 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
           </table>
         </div>
       </div>
+      <div class="container text-end ">
+            <a  class="text-light"href="../controllers/usuario.controller.php?operacion=finalizar">Cerrar sesión</a>
+        </div>
     </div> 
     <!-- Formulario -->
 

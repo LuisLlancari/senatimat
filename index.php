@@ -47,13 +47,13 @@ if (isset($_SESSION['login']) && $_SESSION['login']==true){
               </div>
             </form>
           </div>
-          <div class="card-footer text-end gri">
+          <div class="card-footer text-end bg-primary">
             <div class="row">
               <div class="col">
                 <button type="button" id="iniciar-sesion" class="btn btn-sm btn-success">Iniciar sesión</button>
               </div>
               <div class="col">
-                <button type="button" id="iniciar-sesion" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#modal-usuario">Registrarse</button>
+                <button type="button" id="iniciar-sesion" class="btn btn-sm btn-outline-light"  data-bs-toggle="modal" data-bs-target="#modal-usuario">Registrarse</button>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ if (isset($_SESSION['login']) && $_SESSION['login']==true){
     <div class="modal" tabindex="-1" id="modal-usuario">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header bg-primary text-light">
             <h5 class="modal-title">Registrar usuario</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
