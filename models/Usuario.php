@@ -21,4 +21,18 @@ class Usuario extends Conexion{
     }
   }
 
+  public function registrarusuario($datos=[]){
+    try {
+      $consulta = $this->accesoBD->prepare("CALL spu_usuarios_registrar(?,?)");
+      $consulta->execute(
+        array(
+          $datos['usuario'],
+          $datos['clave']
+        )
+      );
+    } 
+    catch (Exception $e){
+      die($e->getMessage());
+    }
+  }
 }

@@ -146,5 +146,29 @@ CREATE TABLE usuarios
 )ENGINE = INNODB;
 
 
-INSERT INTO usuarios(usuario,clave) VALUES('Jonas','1234')
-SELECT * FROM usuarios
+INSERT INTO usuarios(usuario,clave) VALUES('luis','$2y$10$IRK96EdkKy5uTQEJzBzyY.snwRteXLNf7Mv9WBaGguCtvC8eBcktC')
+	SELECT * FROM usuarios
+
+
+DELIMITER $$
+CREATE PROCEDURE spu_usuarios_login(IN _usuario VARCHAR(20))
+BEGIN
+	SELECT	idusuario, usuario, clave
+		FROM usuarios 
+		WHERE usuario = _usuario AND estado = '1';
+END $$
+
+CALL spu_usuarios_login('Jonas')
+
+DELIMITER$$
+CREATE PROCEDURE spu_usuarios_registrar
+(
+	IN usuario_ VARCHAR(20),
+	IN clave_ VARCHAR(90)
+)
+BEGIN 
+	INSERT INTO usuarios (usuario, clave) VALUES
+	(usuario_, clave_);
+END$$
+
+CALL spu_usuarios_registrar('mario','123')

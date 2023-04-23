@@ -41,6 +41,20 @@ if(isset($_POST['operacion'])){
         echo json_encode($resultado);
     }
 
+    if($_POST['operacion'] == 'registrar'){
+        
+        $claveHASH = password_hash($_POST['clave'], PASSWORD_BCRYPT);
+    
+        $datosGuardar = [
+            "usuario"       => $_POST['usuario'],
+            "clave"         => $claveHASH,
+            
+          ];
+
+          $usuario->registrarusuario($datosGuardar);
+           
+    }
+ 
 }
 
 

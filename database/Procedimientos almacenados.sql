@@ -151,6 +151,8 @@ BEGIN
 END$$
 
 CALL spu_colaborador_getcv(13)
+
+
 -- CREANDO EL ELIMINAR PARA ESTUDIANTES Y SU FOTO
 SELECT * FROM estudiantes
 
@@ -173,3 +175,5 @@ BEGIN
 END$$
 
 CALL spu_estudiantes_getfoto(5)
+
+

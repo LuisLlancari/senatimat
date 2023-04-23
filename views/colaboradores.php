@@ -1,3 +1,11 @@
+<?php
+session_start();
+ 
+if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
+  header('Location: ../index.php');
+}
+
+?>
 <!doctype html>
 <html lang="es">
 
@@ -12,11 +20,16 @@
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-
+    <link rel="stylesheet" href="./css/diseño.css">
 </head>
 
-<body>
-
+<body class="cuerpo">
+  <div class="container mt-3">
+            <button type="button" class="btn btn-sm btn-outline-light btn-lg" id="salir">
+            <i class="bi bi-arrow-bar-left"></i>
+              regresar a Inicio
+            </button>
+  </div>
   <div class="container mt-3">
       <div class="card">
         <div class="card-header bg-primary text-light">
@@ -322,7 +335,9 @@
 
       
         
-      
+      $("#salir").click(function(){
+        window.location.href = "./inicio.php";
+        });
 
       
       $("#guardar-colaborador").click(preguntarRegistro);

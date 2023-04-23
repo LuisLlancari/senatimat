@@ -25,39 +25,49 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
   <link href="../dist/lightbox2/src/css/lightbox.css" rel="stylesheet" />
 
   <!-- <link href="path/to/lightbox.css" rel="stylesheet" /> -->
-
+  <link rel="stylesheet" href="./css/diseño.css">
 </head>
 
-<body>
-  
-  <!-- Modal trigger button -->
-  <div class="container mt-4 bg-success">
-  <button type="button" class="btn btn-sm btn-primary btn-lg mt-1 mb-1 " data-bs-toggle="modal" data-bs-target="#modal-estudiante">
-    Registrar
-  </button>
-  </div>
-  
-  <div class="container">
-    <table id= "tabla-estudiantes"class="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Apellidos</th>
-          <th>Nombres</th>
-          <th>Tipo</th>
-          <th>Documento</th>
-          <th>Nacimiento</th>
-          <th>Carrera</th>
-          <th>Operaciones</th>
-        </tr>
-      </thead>
-      <tbody>
+<body class="cuerpo">
+  <div class="container mt-3">
+              <button type="button" class="btn btn-sm btn-outline-light btn-lg" id="salir">
+              <i class="bi bi-arrow-bar-left"></i>
+                regresar a Inicio
+              </button>
+    </div>
 
-      </tbody>
-    </table>
-    <div class="card-footer text-end">
-        <a href="../controllers/usuario.controller.php?operacion=finalizar">Cerrar sesión</a>
+  <div class="container mt-3">
+    <div class="card">
+      <div class="card-header bg-primary text-light">
+        <button type="button" class="btn btn-sm btn-primary btn-lg mt-1 mb-1 " data-bs-toggle="modal" data-bs-target="#modal-estudiante">
+          Registrar
+        </button>
+      </div>  
+    
+    
+      <div class="card-body">
+        <table id= "tabla-estudiantes"class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Apellidos</th>
+              <th>Nombres</th>
+              <th>Tipo</th>
+              <th>Documento</th>
+              <th>Nacimiento</th>
+              <th>Carrera</th>
+              <th>Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+        <div class="card-footer text-end">
+            <a href="../controllers/usuario.controller.php?operacion=finalizar">Cerrar sesión</a>
+          </div>
       </div>
+    </div>
   </div>
   
   <!-- Modal Body -->
@@ -309,6 +319,10 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] == false){
 
 
       $("#guardar-estudiante").click(preguntarRegistro);
+
+      $("#salir").click(function(){
+        window.location.href = "./inicio.php";
+        });
 
       //Al cambiar una escuela, se actualizará las carreras
       $("#escuela").change(function (){

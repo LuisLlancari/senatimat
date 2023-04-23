@@ -1,0 +1,19 @@
+.card-color{
+    background-color: rgba(250, 153, 14) !important;
+    cursor: pointer !important;
+}
+
+.card-color:hover {
+    background-color: rgb(255, 151, 0 ) !important;
+    box-shadow: 0px 0px 10px rgba(245, 179, 57, 0.788) !important;
+    transform: translateY(-5px) !important;
+  }
+
+.cuerpo{
+    background-color: black !important;
+}
+
+.gri{
+    background-color: rgb(75, 75, 75 );
+}
+  
