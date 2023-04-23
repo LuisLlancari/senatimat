@@ -1,5 +1,18 @@
-CREATE DATABASE senatimat;
-USE senatimat;
+-- CREATE DATABASE senatimat;
+-- USE senatimat;
+
+
+DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `colaboradores`;
+DROP TABLE IF EXISTS `estudiantes`;
+DROP TABLE IF EXISTS `cargos`;
+DROP TABLE IF EXISTS `sedes`;
+DROP TABLE IF EXISTS `carreras`;
+DROP TABLE IF EXISTS `escuelas`;
+
+DROP PROCEDURE IF EXISTS spu_usuarios_login;
+DROP PROCEDURE IF EXISTS spu_usuarios_registrar;
+
 
 CREATE TABLE escuelas
 (
@@ -13,10 +26,9 @@ INSERT INTO escuelas (escuela) VALUES
 	('Administración'), -- 2
 	('Metal mecánica'); -- 3
 
-SELECT * FROM escuelas ORDER BY 1;
-
+ 
 -- ***** SEGUNDA TABLA ***** --
-
+ 
 CREATE TABLE carreras
 (
 	idcarrera 		INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,9 +49,9 @@ INSERT INTO carreras (idescuela, carrera) VALUES
 	(3, 'Mecánico de mantenimiento'),
 	(3, 'Soldador estructuras metálicas');
 
-SELECT * FROM carreras ORDER BY 1;
-
+ 
 -- ****** TERCERA TABLA ******* --
+ 
 CREATE TABLE sedes
 (
 	idsede 		INT AUTO_INCREMENT PRIMARY KEY,
@@ -53,9 +65,9 @@ INSERT INTO sedes (sede) VALUES
 	('Ica'),
 	('Ayacucho');
 
-SELECT * FROM sedes ORDER BY 1;
-
+ 
 -- ******* CUARTA TABLA ********* --
+ 
 CREATE TABLE estudiantes
 (
 	idestudiante 		INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,22 +87,17 @@ CREATE TABLE estudiantes
 	CONSTRAINT fk_idsede_est FOREIGN KEY (idsede) REFERENCES sedes (idsede)
 )ENGINE = INNODB;
 
-INSERT INTO estudiantes 
-	(apellidos, nombres, nrodocumento, fechanacimiento, idcarrera, idsede) VALUES
-	('Martinez', 'Carlos', '44445555', '2000-01-01', 1, 1),
-	('Ochoa', 'Fiorella', '77778888', '2000-10-10', 4, 2),
-	('Perez', 'Roxana', '88881111', '2001-03-03', 7, 3),
-	('Quintana', 'Tania', '33334444', '2001-05-05', 9, 4);
+ 
 
-SELECT * FROM estudiantes;
-
+ 
 
 
 -- CREANDO TABLA CARGO
+ 
 CREATE TABLE cargos
 (
 	idcargo 	INT AUTO_INCREMENT PRIMARY KEY,
-	cargo 	VARCHAR(20),
+	cargo 	VARCHAR(80),
 	CONSTRAINT uk_cargo_cargos UNIQUE (cargo)	
 )ENGINE INNODB;
 
@@ -102,9 +109,8 @@ INSERT INTO cargos (cargo) VALUES
 ('Cordinador ETIA'),
 ('Coordinardor CIS');
 
-SELECT * FROM cargos;
 -- CREANDO TABLA COLABORADORES
-
+ 
 CREATE TABLE colaboradores
 (
 	idcolaborador	INT 		AUTO_INCREMENT PRIMARY KEY,
@@ -124,17 +130,10 @@ CREATE TABLE colaboradores
 
 )ENGINE =INNODB;
 
-
-INSERT INTO colaboradores(apellidos, nombres, idcargo, idsede, telefono, tipocontrato, cv, direccion)VALUES 
-
-('Morales','Paul',2,1,'966341081','C',NULL,'Pisco'),
-('Palomino','Ericka',2,1,'966589781','P',NULL,'Pueblo nuevo');
-
-
-SELECT * FROM colaboradores
-
+ 
+ 
 -- TABLA USUARIOS
-
+ 
 CREATE TABLE usuarios
 (
 	idusuario 		INT  			AUTO_INCREMENT  PRIMARY KEY,
@@ -146,22 +145,20 @@ CREATE TABLE usuarios
 )ENGINE = INNODB;
 
 
-INSERT INTO usuarios(usuario,clave) VALUES('luis','$2y$10$IRK96EdkKy5uTQEJzBzyY.snwRteXLNf7Mv9WBaGguCtvC8eBcktC')
-	SELECT * FROM usuarios
+ 
 
+
+ 
 
 DELIMITER $$
-CREATE PROCEDURE spu_usuarios_login(IN _usuario VARCHAR(20))
+ CREATE PROCEDURE spu_usuarios_login(IN _usuario VARCHAR(20))
 BEGIN
 	SELECT	idusuario, usuario, clave
-		FROM usuarios 
-		WHERE usuario = _usuario AND estado = '1';
+	FROM usuarios 
+	WHERE usuario = _usuario AND estado = '1';
 END $$
 
-CALL spu_usuarios_login('Jonas')
-
-DELIMITER$$
-CREATE PROCEDURE spu_usuarios_registrar
+ CREATE PROCEDURE spu_usuarios_registrar
 (
 	IN usuario_ VARCHAR(20),
 	IN clave_ VARCHAR(90)
@@ -169,6 +166,6 @@ CREATE PROCEDURE spu_usuarios_registrar
 BEGIN 
 	INSERT INTO usuarios (usuario, clave) VALUES
 	(usuario_, clave_);
-END$$
+END $$
 
-CALL spu_usuarios_registrar('mario','123')
+DELIMITER ;

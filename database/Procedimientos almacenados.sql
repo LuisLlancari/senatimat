@@ -1,4 +1,18 @@
-USE senatimat;
+-- USE senatimat;
+
+DROP PROCEDURE IF EXISTS spu_estudiantes_getfoto;
+DROP PROCEDURE IF EXISTS spu_estudiantes_eliminar;
+DROP PROCEDURE IF EXISTS spu_colaborador_getcv;
+DROP PROCEDURE IF EXISTS spu_colaboradores_eliminar;
+DROP PROCEDURE IF EXISTS spu_cargos_listar;
+DROP PROCEDURE IF EXISTS spu_colaboradores_agregar; 
+DROP PROCEDURE IF EXISTS spu_colaboradores_listar; 
+DROP PROCEDURE IF EXISTS spu_sedes_listar; 
+DROP PROCEDURE IF EXISTS spu_escuelas_listar; 
+DROP PROCEDURE IF EXISTS spu_carreras_listar; 
+DROP PROCEDURE IF EXISTS spu_estudiantes_registrar; 
+DROP PROCEDURE IF EXISTS spu_estudiantes_listar; 
+
 
 DELIMITER $$
 CREATE PROCEDURE spu_estudiantes_listar()
@@ -18,8 +32,9 @@ BEGIN
 		WHERE EST.estado = '1';
 END $$
 
+ 
 
-DELIMITER $$
+
 CREATE PROCEDURE spu_estudiantes_registrar
 (
 	IN _apellidos 			VARCHAR(40),
@@ -42,31 +57,24 @@ BEGIN
 	(_apellidos, _nombres, _tipodocumento, _nrodocumento, _fechanacimiento, _idcarrera, _idsede, _fotografia);
 END $$
 
-UPDATE estudiantes
-SET fotografia = NULL
-WHERE fotografia = 'unafoto.jpg' OR
-		fotografia = '';
+ 
 
-/*
-CALL spu_estudiantes_registrar('Francia Minaya', 'Jhon', 'D', '12345678', '1984-09-20', 5, 1, '');
-CALL spu_estudiantes_registrar('Munayco', 'José', 'D', '77779999', '1999-09-20', 3, 2, NULL); */
-CALL spu_estudiantes_registrar('Prada', 'Teresa', 'C', '01234567', '2002-09-25', 3, 2, '');
-SELECT * FROM estudiantes;
+ 
 
 
-DELIMITER $$
+
 CREATE PROCEDURE spu_sedes_listar()
 BEGIN
 	SELECT * FROM sedes ORDER BY 2;
 END $$
 
-DELIMITER $$
+
 CREATE PROCEDURE spu_escuelas_listar()
 BEGIN 
 	SELECT * FROM escuelas ORDER BY 2;
 END $$
 
-DELIMITER $$
+
 CREATE PROCEDURE spu_carreras_listar(IN _idescuela INT)
 BEGIN
 	SELECT idcarrera, carrera 
@@ -74,12 +82,11 @@ BEGIN
 		WHERE idescuela = _idescuela;
 END $$
 
-CALL spu_carreras_listar(3);
-
+ 
 -- LISTANDO COLABORADORES 
-	SELECT * FROM colaboradores
+ 
 
-DELIMITER$$
+
 CREATE PROCEDURE spu_colaboradores_listar()
 BEGIN
 	SELECT COLB.idcolaborador,
@@ -94,11 +101,11 @@ BEGIN
 	WHERE COLB.estado ='1';
 END$$
 
-CALL spu_colaboradores_listar();
-
+ 
 -- AGREGANDO COLABORADORES
+ 
 
-DELIMITER$$
+
 CREATE PROCEDURE spu_colaboradores_agregar
 (
 	IN apellidos_ 		VARCHAR(40),
@@ -120,19 +127,20 @@ BEGIN
 	(apellidos_, nombres_, idcargo_, idsede_, telefono_, tipocontrato_, direccion_, cv_);
 END$$
 
-CALL spu_colaboradores_agregar('Pachas','Melany','96691378',3,2,'C','algun lugar', NULL);
-
+ 
 -- Listar Cargos
+ 
 
-DELIMITER $$
+
 CREATE PROCEDURE spu_cargos_listar()
 BEGIN
 	SELECT * FROM cargos ORDER BY 1;
 END $$
-	SELECT * FROM colaboradores ORDER BY 1;
-	
+ 	
+ 
+
 -- PROCEDIMIENTO PARA ELIINAR COLABORADORES
-DELIMITER $$
+
 CREATE PROCEDURE spu_colaboradores_eliminar(IN idcolaborador_ INT)
 BEGIN
 	 
@@ -140,23 +148,17 @@ BEGIN
 	WHERE idcolaborador = idcolaborador_;
 END$$
 
-	SELECT * FROM colaboradores;
+ 
 
-CALL spu_colaboradores_eliminar(2)
-
-DELIMITER$$
 CREATE PROCEDURE spu_colaborador_getcv(IN idcolaborador_ INT)
 BEGIN
 	SELECT cv FROM colaboradores WHERE idcolaborador = idcolaborador_;
 END$$
 
-CALL spu_colaborador_getcv(13)
-
+ 
 
 -- CREANDO EL ELIMINAR PARA ESTUDIANTES Y SU FOTO
-SELECT * FROM estudiantes
 
-DELIMITER $$
 CREATE PROCEDURE spu_estudiantes_eliminar(IN idestudiante_ INT)
 BEGIN
 	 
@@ -164,16 +166,13 @@ BEGIN
 	WHERE idestudiante = idestudiante_;
 END$$
 
-CALL spu_estudiantes_eliminar(1)
+ 
 
-
-
-DELIMITER$$
 CREATE PROCEDURE spu_estudiantes_getfoto(IN idestudiante_ INT)
 BEGIN
 	SELECT fotografia FROM estudiantes WHERE idestudiante = idestudiante_;
 END$$
+ 
 
-CALL spu_estudiantes_getfoto(5)
-
+DELIMITER ;
 
