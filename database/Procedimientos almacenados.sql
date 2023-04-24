@@ -11,7 +11,9 @@ DROP PROCEDURE IF EXISTS spu_sedes_listar;
 DROP PROCEDURE IF EXISTS spu_escuelas_listar; 
 DROP PROCEDURE IF EXISTS spu_carreras_listar; 
 DROP PROCEDURE IF EXISTS spu_estudiantes_registrar; 
-DROP PROCEDURE IF EXISTS spu_estudiantes_listar; 
+DROP PROCEDURE IF EXISTS spu_estudiantes_listar;
+DROP PROCEDURE IF EXISTS spu_usuarios_login;
+DROP PROCEDURE IF EXISTS spu_usuarios_registrar; 
 
 
 DELIMITER $$
@@ -173,6 +175,24 @@ BEGIN
 	SELECT fotografia FROM estudiantes WHERE idestudiante = idestudiante_;
 END$$
  
+ 
+DELIMITER $$
+ CREATE PROCEDURE spu_usuarios_login(IN _usuario VARCHAR(20))
+BEGIN
+	SELECT	idusuario, usuario, clave
+	FROM usuarios 
+	WHERE usuario = _usuario AND estado = '1';
+END $$
+
+ CREATE PROCEDURE spu_usuarios_registrar
+(
+	IN usuario_ VARCHAR(20),
+	IN clave_ VARCHAR(90)
+)
+BEGIN 
+	INSERT INTO usuarios (usuario, clave) VALUES
+	(usuario_, clave_);
+END $$
 
 DELIMITER ;
 

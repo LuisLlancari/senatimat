@@ -1,5 +1,5 @@
--- CREATE DATABASE senatimat;
--- USE senatimat;
+ CREATE DATABASE senatimat;
+  USE senatimat;
 
 
 DROP TABLE IF EXISTS `usuarios`;
@@ -10,8 +10,7 @@ DROP TABLE IF EXISTS `sedes`;
 DROP TABLE IF EXISTS `carreras`;
 DROP TABLE IF EXISTS `escuelas`;
 
-DROP PROCEDURE IF EXISTS spu_usuarios_login;
-DROP PROCEDURE IF EXISTS spu_usuarios_registrar;
+
 
 
 CREATE TABLE escuelas
@@ -144,28 +143,5 @@ CREATE TABLE usuarios
 	CONSTRAINT un_usuario_usu UNIQUE(usuario)
 )ENGINE = INNODB;
 
-
- 
-
-
- 
-
-DELIMITER $$
- CREATE PROCEDURE spu_usuarios_login(IN _usuario VARCHAR(20))
-BEGIN
-	SELECT	idusuario, usuario, clave
-	FROM usuarios 
-	WHERE usuario = _usuario AND estado = '1';
-END $$
-
- CREATE PROCEDURE spu_usuarios_registrar
-(
-	IN usuario_ VARCHAR(20),
-	IN clave_ VARCHAR(90)
-)
-BEGIN 
-	INSERT INTO usuarios (usuario, clave) VALUES
-	(usuario_, clave_);
-END $$
 
 DELIMITER ;
